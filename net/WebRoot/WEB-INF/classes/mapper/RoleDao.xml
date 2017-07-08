@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guo.net.dao.RoleDao">
+
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<select id="queryById" resultType="Role" parameterType="String">
+		<!-- 具体的sql -->
+		SELECT
+			r_id,
+			r_des
+		FROM
+			role
+		WHERE
+			r_id = #{id}
+	</select>
+
+	<select id="queryAll" resultType="Role">
+		SELECT
+			r_id,
+			r_des
+		FROM
+			role
+		ORDER BY
+			r_id
+		LIMIT #{offset}, #{limit}
+	</select>
+
+</mapper>

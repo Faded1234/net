@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guo.net.dao.UserDao">
+
+
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<select id="queryByName" resultType="com.guo.net.entity.User" parameterType="java.lang.String">
+		<!-- 具体的sql -->
+		SELECT
+		u_userName,
+		u_password,
+		u_tel,
+		u_email,
+		u_sex,
+		u_province,
+		u_companyEmail,
+		u_company,
+		u_role,
+		u_postcode
+		From
+			user
+		WHERE
+		u_userName = #{name}
+	</select>
+
+	<select id="queryAll" resultType="User">
+		SELECT
+		u_userName,
+		u_password,
+		u_tel,
+		u_email,
+		u_sex,
+		u_province,
+		u_companyEmail,
+		u_company,
+		u_role,
+		u_postcode
+		FROM
+		user
+		ORDER BY
+		u_userName
+		LIMIT #{offset}, #{limit}
+	</select>
+
+
+
+	<insert id="addByName" parameterType="User">
+		<!-- 具体的sql -->
+		insert ignore into user
+		u_userName,
+		u_password,
+		u_tel,
+		u_email,
+		u_sex,
+		u_province,
+		u_companyEmail,
+		u_company,
+		u_role,
+		u_postcode
+		FROM
+		user
+		values
+		(#{u_userName}, , , ,
+		, , , )
+	</insert>
+
+	<delete id="delectByName"></delete>
+
+	<update id="updateByName"></update>
+
+
+	<!-- 多对一的复合属性 SELECT a.book_id, a.student_id, a.appoint_time, b.book_id 
+		"book.book_id", b.`name` "book.name", b.number "book.number" FROM appointment 
+		a INNER JOIN book b ON a.book_id = b.book_id WHERE a.book_id = #{bookId} 
+		AND a.student_id = #{studentId} -->
+</mapper>

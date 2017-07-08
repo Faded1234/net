@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guo.net.dao.BusinessDao">
+
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<select id="queryByName" resultType="Business" parameterType="String">
+		<!-- 具体的sql -->
+		SELECT
+			b_name,
+			b_password,
+			b_userId,
+			b_state,
+			b_loginDate,
+			b_quitDate,
+			b_serverId,
+			b_postageId,
+			s.s_id "server.s_id",
+			s.s_name "server.s_name"
+		FROM
+			business b
+		INNER JOIN 
+			server s ON s.s_id = b.b_serverId
+		WHERE
+			b.b_name = #{name}
+	</select>
+
+	<select id="queryAll" resultType="Business">
+		SELECT
+			b.b_name,
+			b_password,
+			b.b_userId,
+			b.b_state,
+			b.b_loginDate,
+			b.b_quitDate,
+			b.b_serverId,
+			b.b_postageId,
+		FROM
+			business b
+		ORDER BY
+			b_name
+		LIMIT #{offset}, #{limit}
+	</select>
+
+	
+
+</mapper>
